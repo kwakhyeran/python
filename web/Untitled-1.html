@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang ="ko">
+<head>
+    <meta charset = "UTF-8"
+    <meta name="viewport" content="width=devixe-width"
+    <title>CSS 우선순위</title>
+    <style>
+        P {
+            color : yellow;
+        }
+        .cyan {
+            color : cyan !important ;
+        }
+        .red{
+            color:red;
+        }
+        .green{
+            color:green;
+        }
+        #blue {
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+    
+    <p class="red cyan" >나는 무슨색??</p>
+    <!--inline 적용은 굳이 굳이 찾아서 적용-->
+    <p class="red" id="blue" style="black;">빨간색 글씨</p>
+    <!--id는 보통 고유 값-->
+   <p class="red" id="blue">빨간색 글씨</p>
+   <!-- class는 보편적으로 css를 적용할 때 사용 -->
+   <p class="red" >빨간색 글씨</p>
+   <!-- -->
+   <p class="red green" >나는 무슨색??</p>
+</body>

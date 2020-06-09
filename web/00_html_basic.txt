@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang ="ko">
+<head>
+    <meta charset = "UTF-8"
+    <meta name="viewport" content="width=devixe-width"
+    <title>TITLE</title>
+</head>
+<body>
+    <!--볼드체-->
+    <strong>강한아이</strong>
+</body>
+</html>
