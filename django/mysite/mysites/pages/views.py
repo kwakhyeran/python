@@ -14,3 +14,5 @@ def dtl(request):
         'today':today
     }
     return render(request,'dtl.html',context)
+
+def 

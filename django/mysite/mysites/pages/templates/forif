@@ -1,0 +1,7 @@
+# 1. 간단한 반복문으로 리스트 각 요소들 출력
+{% for data in my_list %}
+{{data}}
+{% endfor %}
+
+# 2. 
+
