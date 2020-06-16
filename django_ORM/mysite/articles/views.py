@@ -71,5 +71,38 @@ def delete(request, article_pk):
     return redirect('articles:index')
 
 
+# edit 
+# 1. 특정 글 수정을 위한 경로 생성
+# 1-1. /articles/1/edit.
+# 2. 글 수정 template 를 render하는 edit view 작성
+# 2-1. 해당 template에 form tag작성
+# 2-2. 각 input tag 내부에 기존 내용이 들어있어야 함
+# 2-3. value 속성을 활용 하시면 됩니다.
+
+def edit(request,article_pk):
+    article = Article.objects.get(pk = article_pk)
+    context ={
+        'article':article,
+    }
+    return render(request,'articles/edit.html',context)
+
+
+# update
+# 3. edit에서 보낸 데이터 처리를 위한 경로 생성
+# 3-1 . /articles/1/update/
+# 4. 글 수정 처리를 하는 update view 작성
+# 5. 해당 글 상세 페이지로 redirect
+# 6. 글 수정을 위한 edit 링크 상세 페이지에 생성
+# 6-1. {% url 'articles:edit' article.pk %}
+
+def update(request,article_pk):
+    article = Article.objects.get(pk = article_pk)
+    article.title = request.GET.get('title')
+    article.content = request.GET.get('content')
+    article.save()
+    return redirect('articles:detail', article_pk)
+    # detail에서 pk를 받기 때문에 redirect에서도 pk를 넘겨준다.
+
+
 
 
