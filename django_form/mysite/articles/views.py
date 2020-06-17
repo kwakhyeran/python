@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect , get_object_or_404
 from .models import Article
 from .forms import ArticleForm
 
@@ -28,7 +28,8 @@ def create(request):
     return render(request, 'articles/form.html', context)
 
 def update(request, article_pk):
-    article = Article.objects.get(pk=article_pk)
+    article = get_object_or_404(Article,pk=article_pk)
+    #article = Article.objects.get(pk=article_pk)
     if request.method=="POST":
         form = ArticleForm(request.POST,instance=article)
         if form.is_valid():
@@ -42,7 +43,9 @@ def update(request, article_pk):
     return render(request, 'articles/form.html',context)
 
 def detail(request,article_pk):
-    article = Article.objects.get(pk = article_pk)
+    #article = get_object_or_404(모델정보,pk=article_pk)
+    article = get_object_or_404(Article,pk=article_pk)
+    # article = Article.objects.get(pk = article_pk)
 
     context = {
         'article' : article
