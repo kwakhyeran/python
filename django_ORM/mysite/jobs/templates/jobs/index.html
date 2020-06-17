@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1>전생?</h1>
+<form action="{% url 'jobs:past_life' %}" method="GET">
+  <label for="name">이름을 입력하세요 : </label>
+  <input type="text" id="name" name="name">
+  <input type="submit" value="전생확인!">
+</form>
+<hr>
+<ul>
+  {% for i in persons %}
+    <li>{{ i }}</li>  
+  {% endfor %}
+</ul>
+{% endblock %}

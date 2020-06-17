@@ -64,12 +64,21 @@ def detail(request,article_pk):
 # 2. 글 삭제 처리를 해주는 view 작성
 # 3. 글 살제 후 , index page로 redirect
 # 4. 글 삭제를 위한 링크 detail에 작성
-
+"""
+#GET방식일때 
 def delete(request, article_pk):
     article = Article.objects.get(pk=article_pk)
     article.delete()
     return redirect('articles:index')
+"""
 
+# POST방식
+def delete(request,article_pk):
+    article = Article.objects.get(pk=article_pk)
+    if request.method == "POST":
+        article.delete()
+        return redirect('articles:index')
+    return redirect('articles:detail',article_pk)
 
 # edit 
 # 1. 특정 글 수정을 위한 경로 생성
@@ -94,7 +103,8 @@ def edit(request,article_pk):
 # 5. 해당 글 상세 페이지로 redirect
 # 6. 글 수정을 위한 edit 링크 상세 페이지에 생성
 # 6-1. {% url 'articles:edit' article.pk %}
-
+"""
+#get방식
 def update(request,article_pk):
     article = Article.objects.get(pk = article_pk)
     article.title = request.GET.get('title')
@@ -103,6 +113,11 @@ def update(request,article_pk):
     return redirect('articles:detail', article_pk)
     # detail에서 pk를 받기 때문에 redirect에서도 pk를 넘겨준다.
 
+"""
 
-
-
+def update(request,article_pk):
+    article = Article.objects.get(pk = article_pk)
+    article.title = request.POST.get('title')
+    article.content = request.POST.get('content')
+    article.save()
+    return redirect('articles:detail', article_pk)

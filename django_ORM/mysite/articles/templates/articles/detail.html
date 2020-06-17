@@ -9,7 +9,11 @@
   <p>수정 시간 : {{article.updated_at}}</p>
   <!-- -->
   <a href="{% url 'articles:index' %}">[back]</a>
-  <a href="{% url 'articles:delete' article.pk %}">[delete]</a>
+  <!--<a href="{% url 'articles:delete' article.pk %}">[delete]</a>-->
+  <form action="{% url 'articles:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="[Delete]">
+  </form>
   <a href="{% url 'articles:edit' article.pk %}">[edit]</a>
 
 {% endblock %}
