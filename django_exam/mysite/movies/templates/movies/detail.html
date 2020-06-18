@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+{% block body %}
+<h3>{{movie.title}}</h3>
+<p>{{movie.title_en}}</p>
+<p>{{movie.audience}}</p>
+<p>{{movie.open_date}}</p>
+<p>{{movie.genre}}</p>
+<p>{{movie.watch_grade}}</p>
+<p>{{movie.score}}</p>
+<p>{{movie.poster_url}}</p>
+<p>{{movie.description}}</p>
+<a href="{% url 'movies:update' %}">[수정하기]</a>
+<form action="{% url 'movies:index' movie.pk % }">
+<input type="submit" value="삭제하기">
+</form>
+{% endblock %}
