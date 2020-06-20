@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  {% if request.resolver_match.url_name == 'create' %}
+  <h1>글 생성 페이지</h1>
+  {% else %}
+  <h1>글 수정 페이지</h1>
+  {% endif %}
+  <form action="" method="POST" class="create" >
+    {% csrf_token %}
+    {%  form.as_p %}
+    <input type="submit" value="제출">
+    <a href="{% url 'paprikas:index %} ">[뒤로가기]</a>
+   
+
+  </form>
+</body>
+</html>
