@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>{{article.title}}</h1>
+  <hr>
+  <p>작성자 : {{article.user}}</p>
+  {% if article.created_at == article.updated_at %}
+    <p>작성 시간 : {{article.created_at}}</p>
+  {% else %}
+    <p>수정 시간 : {{article.updated_at}}</p>
+  {% endif %}
+  <hr>
+  <p>{{article.content}}</p>
+  <hr>
+  <a href="{% url 'paprikas:update' article.pk %}">[수정하기]</a>
+  <form action="{% url 'paprikas:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="삭제하기">
+  </form>
+  <a href="{% url 'paprikas:index' %}"> [게시판 메인으로 돌아가기]</a>
+</body>
+</html>

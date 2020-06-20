@@ -13,11 +13,9 @@
   {% endif %}
   <form action="" method="POST" class="create" >
     {% csrf_token %}
-    {%  form.as_p %}
+    {{form.as_p}}
     <input type="submit" value="제출">
-    <a href="{% url 'paprikas:index %} ">[뒤로가기]</a>
-   
-
+    <a href="{% url 'paprikas:index'% }">[뒤로가기]</a>
   </form>
 </body>
 </html>

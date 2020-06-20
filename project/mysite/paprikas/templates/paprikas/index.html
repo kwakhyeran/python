@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <h1>게시판 메인 페이지 입니다.</h1>
+    
+    <ol>
+      {% for article in articles %}
+        <li> <a href="{% url 'paprikas:detail' article.pk%}">
+          제목 : {{article.title}} </a> / 작성자  : {{article.user}}</li>
+      {% endfor %}
+    </ol>
+
+    <h3><a href="{% url 'paprikas:main' %}"> 메인화면으로 돌아가기 </a></h3>
+    <a href="{% url 'paprikas:create' %}">[생성하기]</a>
+  </body>
+</html>
