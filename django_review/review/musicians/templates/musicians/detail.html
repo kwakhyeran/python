@@ -6,18 +6,22 @@
   <title>Document</title>
 </head>
 <body>
-  
-  <h1>상세 페이지</h1>
+  <h1>{{ musician.name}}</h1>
   <hr>
-  <h1>{{ musician }}</h1>
+  <p>이름  : {{ musician.name }}</a></p>
+  <p>나이 : {{ musician.age }}</p>
   <hr>
-  <p>{{ musician.name }}</p>
-  <p>{{ musician.age }}</p>
+  <h2>앨범 목록</h2>
+  <ol>
+    {% for album in albums %}
+      <li>{{album.title}} / {{album.release_date}}</li>
+    {% endfor %}
+  </ol>
   <a href="{% url 'musicians:update' musician.pk %}">[수정하기]</a>
   <form action="{% url 'musicians:delete' musician.pk %}" method="POST">
     {% csrf_token %}
     <input type="submit" value="삭제하기">
   </form>
-  
+
 </body>
 </html>

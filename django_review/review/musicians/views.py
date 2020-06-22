@@ -1,10 +1,9 @@
-from django.shortcuts import render,redirect
-from .forms import MusicianForm
-from .models import Musician
-# Create your views here.
-def index(request):
-    return render(request,'musicians/index.html')
+from django.shortcuts import render,redirect,get_object_or_404
+from .forms import MusicianForm,AlbumForm
+from .models import Musician,Album
+from django.views.decorators.http import require_POST
 
+# Create your views here.
 def create(request):
     if request.method=="POST":
         form = MusicianForm(request.POST)
@@ -22,9 +21,11 @@ def create(request):
     return render(request,'musicians/create.html',context)
 
 def detail(request,musician_pk):
-    musician = Musician.objects.get(pk =musician_pk)
+    musician = get_object_or_404(Musician,pk=musician_pk)
+    albums = musician.album_set.all()
     context ={
-        'musician' : musician
+        'musician' : musician,
+        'albums' : albums
     }
     return render(request,'musicians/detail.html',context)
 
