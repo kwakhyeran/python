@@ -20,7 +20,7 @@ def signup(request):
     context = {
         'form': form
     }
-    return render(request, 'accounts/signup.html', context)
+    return render(request, 'accounts/form.html', context)
 
 def login(request):
     if request.user.is_authenticated:
@@ -44,7 +44,7 @@ def login(request):
     context = {
         'form': form
     }
-    return render(request, 'accounts/login.html', context)
+    return render(request, 'accounts/form.html', context)
 
 def logout(request):
     auth_logout(request)
@@ -66,7 +66,7 @@ def update(request):
     context = {
         'form': form
     }
-    return render(request, 'accounts/update.html', context)
+    return render(request, 'accounts/form.html', context)
 
 def change_password(request):
     if request.method == "POST":
@@ -80,4 +80,4 @@ def change_password(request):
     context = {
         'form': form
     }
-    return render(request, 'accounts/change_password.html', context)
+    return render(request, 'accounts/form.html', context)
