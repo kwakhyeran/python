@@ -1,7 +1,9 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 class Article(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -13,6 +15,7 @@ class Article(models.Model):
 class Comment(models.Model):
     #멤버 변수 = models.외래키(참조하는 객체, 삭제 되었을 때 처리방법)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #역참조 값 설정 related_name='comments'
     content = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)

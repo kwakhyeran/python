@@ -3,6 +3,7 @@
 <h1>상세 페이지</h1>
 <hr>
 <p>{{ article.pk }}번째 글</p>
+<p>{{article.user}}</p>
 <h2>{{ article.title }}</h2>
 <h3>{{ article.content }}</h3>
 <hr>
@@ -17,23 +18,28 @@
 <ol>
   {% for comment in comments%}
     <li>
-      {{comment.content}}
+      {{comment.user}} : {{comment.content}}
       <!--2개 이상의 값을 넘겨주고자 할 때 순서 주의-->
+      {% if comment.user == request.user %}
       <form action="{% url 'articles:comment_delete' article.pk comment.pk %}" method="POST">
         {% csrf_token %}
         
         <input type="submit" value="댓글 삭제!">
       </form>
+      {% endif %}
     </li>
   {% empty %}
     <p>댓글이 없습니다!!!</p>
   {% endfor %}
 </ol>
-<a href="{% url 'articles:update' article.pk %}">[UPDATE]</a>
+{% if article.user == request.user %}
+  <a href="{% url 'articles:update' article.pk %}">[UPDATE]</a>
+  <form action="{% url 'articles:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="DELETE" class="btn btn-primary">
+  </form>
+{% endif %}
 <a href="{% url 'articles:index' %}">[back]</a>
-<form action="{% url 'articles:delete' article.pk %}" method="POST">
-  {% csrf_token %}
-  <input type="submit" value="DELETE" class="btn btn-primary">
-</form>
+
 
 {% endblock %}
