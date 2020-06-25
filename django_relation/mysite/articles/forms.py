@@ -5,7 +5,7 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         
-        exclude = ['user']
+        exclude = ['user','like_users','recommend_users']
 
 class CommentForm(forms.ModelForm):
     class Meta:
