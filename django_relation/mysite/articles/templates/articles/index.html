@@ -27,4 +27,7 @@
  <a href="{% url 'articles:detail' article.pk %}">[DETAIL]</a>
  <hr>
 {% endfor %}
+{% for num in article.paginator.page_range %}
+  <a href="{% url 'articles:inde' %}?page={{num}}">{{ num }}</a>
+{% endfor %}
 {% endblock %}

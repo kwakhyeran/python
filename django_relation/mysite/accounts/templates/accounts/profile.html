@@ -24,4 +24,11 @@
       <p>댓글을 단 적이 없습니다.</p>
     {% endfor %}
   </ul>
+  {% if user != person %}
+    {% if user in person.followers.all %}
+      <a href="{% url 'accounts:follow' person.pk %}">[팔로우 취소]</a>
+    {% else %}
+      <a href="{% url 'accounts:follow' person.pk %}">[팔로우]</a>
+    {% endif %}
+  {% endif %}
 {% endblock %}

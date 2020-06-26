@@ -6,16 +6,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
     articles = Article.objects.all()
+    paginator = Paginator(articles,3)
+    article = paginator.page_range
     context = {
         'articles': articles
     }
     return render(request, 'articles/index.html', context)
 
-def detail(request, article_pk):
+def detail(request,article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     comment_form = CommentForm()
     # 1은 N을 보장할 수 없기 때문에 querySet(comment_set)형태로
@@ -24,9 +27,9 @@ def detail(request, article_pk):
     context = {
         'article': article,
         'comment_form': comment_form,
-        'comments': comments,
+        'comments': comments
     }
-    return render(request, 'articles/detail.html', context)
+    return render(request,'articles/detail.html', context)
 
 @login_required
 def create(request):
@@ -103,7 +106,7 @@ def comment_delete(request, article_pk, comment_pk):
         comment = get_object_or_404(Comment, pk=comment_pk)
         if comment.user == request.user:
             comment.delete()
-        return redirect('articles:detail', article_pk)
+        return redirect('articles:detail',article_pk)
     else:
         return redirect('accounts:login')
 
